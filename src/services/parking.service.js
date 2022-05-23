@@ -5,8 +5,8 @@ class ParkingService {
         return http.get("/");
     }
 
-    parkCar() {
-        return http.post("/");
+    parkCar(data) {
+        return http.post("/", data);
     }
 
     unparkCar() {

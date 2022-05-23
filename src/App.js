@@ -1,11 +1,13 @@
 import ParkCar from "./components/park-car.component"
+import UnparkCar from "./components/unpark-car.component"
 
 function App() {
   return (
     <div className="App">
-      <div>
-        <ParkCar />
-      </div>
+        <ParkCar/>
+        <br/>
+        <br/>
+        <UnparkCar/>
     </div>
   );
 }

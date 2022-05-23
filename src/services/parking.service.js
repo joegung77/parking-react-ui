@@ -9,8 +9,8 @@ class ParkingService {
         return http.post("/", data);
     }
 
-    unparkCar() {
-        return http.delete("/{id}");
+    unparkCar(id) {
+        return http.delete(`/${id}`);
     }
 }
 

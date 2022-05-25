@@ -3,54 +3,64 @@ import ParkingService from "../services/parking.service";
 
 export default class ParkCar extends Component {
 
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
-            vehicleSize: "SMALL"
+            vehicleSize: ""
         }
         this.onValueChange = this.onValueChange.bind(this);
         this.formSubmit = this.formSubmit.bind(this);
     }
 
-    onValueChange(event) {
+    onValueChange(e) {
         this.setState({
-            selectedOption : event.target.value
+            vehicleSize : e.target.value
         })
     
     }
 
-    formSubmit(event) {
-        event.preventDefault(event);
-        console.log(this.state.selectedOption)
+    formSubmit(e) {
+        e.preventDefault();
         var data = {
-            vehicleSize : this.state.selectedOption
+            vehicleSize : this.state.vehicleSize
         }
 
-        console.log(data);
 
         ParkingService.parkCar(data)
             .then(response => {
-                this.setState({
-                    vehicleSize: response.data.vehicleSize,
-                    submitted: true
-                });
-                console.log(response.data);
+                alert(response.data);
             })
             .catch(e => {
                 console.log(e);
+                alert(e.response.data);
             });
+
+        this.setState({
+            vehicleSize : ""
+        })
     }
 
     render() {
         return (
             <div>
                 <form onSubmit={this.formSubmit}>
-                    <input type="radio"  checked = {this.state.selectedOption === "SMALL"} onChange = {this.onValueChange} value="SMALL"/>
-                    <label htmlFor="small">Small</label><br/>
-                    <input type="radio"  checked = {this.state.selectedOption === "MEDIUM"} onChange = {this.onValueChange} value="MEDIUM"/>
-                    <label htmlFor="medium">Medium</label><br/>
-                    <input type="radio"  checked = {this.state.selectedOption === "LARGE"} onChange = {this.onValueChange} value="LARGE"/>
-                    <label htmlFor="large">Large</label><br/>
+                    <input type="radio" 
+                            id = "small"
+                            checked = {this.state.vehicleSize === "SMALL"} 
+                            onChange = {this.onValueChange} value="SMALL"/>
+                    <label htmlFor = "small">Small</label><br/>
+                    <input type="radio" 
+                            id = "medium" 
+                            checked = {this.state.vehicleSize === "MEDIUM"}
+                            onChange = {this.onValueChange} 
+                            value="MEDIUM"/>
+                    <label htmlFor = "medium">Medium</label><br/>
+                    <input type="radio" 
+                            id = "large" 
+                            checked = {this.state.vehicleSize === "LARGE"}
+                            onChange = {this.onValueChange} 
+                            value="LARGE"/>
+                    <label htmlFor = "large">Large</label><br/>
                     <input type="submit" value="Park Car"/>
                 </form>
             </div>

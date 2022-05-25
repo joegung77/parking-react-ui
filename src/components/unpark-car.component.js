@@ -11,24 +11,26 @@ export default class UnparkCar extends Component {
         this.formSubmit = this.formSubmit.bind(this);
     }
 
-    onValueChange(event) {
+    onValueChange(e) {
         this.setState({
-            id : event.target.value
+            id : e.target.value
         })
     }
 
-    formSubmit(event) {
-        event.preventDefault(event);
-        console.log(this.state.id)
+    formSubmit(e) {
+        
+        e.preventDefault(e);
+        console.log(ParkingService.getAll);
         ParkingService.unparkCar(this.state.id)
         .then(response => {
+            alert(response.data)
             console.log(response.data);
         })
         .catch(e => {
+            console.log(this.state.id);
             console.log(e);
         });
     }
-
 
     render() {
         return (

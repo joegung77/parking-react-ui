@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import ParkingService from "../services/parking.service";
 
 export default class UnparkCar extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             id : ""
         }
@@ -18,7 +18,6 @@ export default class UnparkCar extends Component {
     }
 
     formSubmit(e) {
-        
         e.preventDefault(e);
         console.log(ParkingService.getAll);
         ParkingService.unparkCar(this.state.id)
